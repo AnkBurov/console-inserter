@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+group 'io.ankburov'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "io.ankburov.console.inserter.Starter"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+dependencies {
+    compile "org.projectlombok:lombok:1.18.6",
+            "io.projectreactor:reactor-core:3.2.8.RELEASE",
+            "org.slf4j:slf4j-api:1.7.9",
+            "ch.qos.logback:logback-classic:1.2.3",
+            "org.jdbi:jdbi3-core:3.6.0",
+            "com.google.guava:guava:27.1-jre",
+            "commons-cli:commons-cli:1.4",
+            "mysql:mysql-connector-java:8.0.15"
+
+    testCompile "org.mockito:mockito-all:1.10.19",
+                "org.testcontainers:testcontainers:1.11.1",
+                "org.testcontainers:mysql:1.11.1",
+                "commons-io:commons-io:2.6",
+                "commons-lang:commons-lang:2.6",
+                "junit:junit:4.12"
+}
